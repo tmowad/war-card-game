@@ -2,7 +2,6 @@ public class WarDeck implements Deck {
   boolean isInitialized = false;
 
   public void create( int numberOfSuits, int numberOfRanks ) {
-    throw new RuntimeException("not implemented");
   }
 
   public void shuffle() {
