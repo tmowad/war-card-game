@@ -5,7 +5,7 @@ import org.junit.Test;
 public class TestWarDeck {
   @Test
   public void cannotDealBeforeCreating() {
-    WarDeck deck = new WarDeck();
+    Deck deck = new WarDeck();
     try {
       deck.deal();
       assertNull("Should have thrown exception", new Object());
@@ -13,6 +13,11 @@ public class TestWarDeck {
     }
   }
 
+  @Test
+  public void createSmallDeck() {
+    Deck deck = new WarDeck();
+    deck.create(1, 1);
+  }
   public static void main(String[] args) {
     org.junit.runner.JUnitCore.main("TestWarDeck");
   }
