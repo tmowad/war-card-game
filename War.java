@@ -39,10 +39,20 @@ public class War {
             }
         }
 
-        int winningestIndex = 0;
-        Card winningestCard = oneFromEach[0];
+        int winningestIndex = -1;
+        Card winningestCard = null;
 
-        for (int i=1; i<oneFromEach.length; i++) {
+        for (int i=0; i<oneFromEach.length; i++) {
+            if (oneFromEach[i] == null) {
+                continue;
+            }
+
+            if (winningestCard == null) {
+                winningestCard = oneFromEach[i];
+                winningestIndex = i;
+                continue;
+            }
+
             int compareResult = oneFromEach[i].compareTo(winningestCard);
             if (compareResult > 0) {
                 winningestCard = oneFromEach[i];

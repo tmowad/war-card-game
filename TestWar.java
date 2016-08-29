@@ -63,7 +63,7 @@ public class TestWar {
         game.playOneRound(new WarPlayer[] { first, second, third });
         assertEquals(0, first.handSize());
         assertEquals(0, second.handSize());
-        assertEquals(0, third.handSize());
+        assertEquals(2, third.handSize());
 
 
     }
