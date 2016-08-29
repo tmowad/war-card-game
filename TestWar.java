@@ -48,6 +48,26 @@ public class TestWar {
         assertEquals(2, second.handSize());
     }
 
+    @Test
+    public void testOneRoundWithAnEmptyPlayer() {
+        WarPlayer first = new WarPlayer();
+        WarPlayer second = new WarPlayer();
+        second.addCard(new Card(new WarRank(3), new WarSuit("spades")));
+        WarPlayer third = new WarPlayer();
+        third.addCard(new Card(new WarRank(7), new WarSuit("hearts")));
+        assertEquals(0, first.handSize());
+        assertEquals(1, second.handSize());
+        assertEquals(1, third.handSize());
+
+        War game = new War();
+        game.playOneRound(new WarPlayer[] { first, second, third });
+        assertEquals(0, first.handSize());
+        assertEquals(0, second.handSize());
+        assertEquals(0, third.handSize());
+
+
+    }
+
     public static void main(String[] args) {
       org.junit.runner.JUnitCore.main("TestWar");
     }
