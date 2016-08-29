@@ -13,6 +13,6 @@ public class WarDeck implements Deck {
     if (isInitialized == false) {
       throw new RuntimeException("cannot deal a card before initialization");
     }
-    return null;
+    return new Card();
   }
 }

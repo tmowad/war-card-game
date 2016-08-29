@@ -13,4 +13,9 @@
 public class Card {
   private Rank rank;
   private Suit suit;
+
+  public boolean equals(Object other) {
+    Card otherCard = (Card) other;
+    return this.rank.equals(otherCard.rank) && this.suit.equals(otherCard.suit);
+  }
 }

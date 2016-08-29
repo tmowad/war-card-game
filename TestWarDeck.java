@@ -1,5 +1,7 @@
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 public class TestWarDeck {
@@ -25,6 +27,9 @@ public class TestWarDeck {
     deck.create(2,2);
     Card cardOne = deck.deal();
     Card cardTwo = deck.deal();
+    assertNotNull(cardOne);
+    assertNotNull(cardTwo);
+    assertNotEquals(cardOne, cardTwo);
   }
   public static void main(String[] args) {
     org.junit.runner.JUnitCore.main("TestWarDeck");
