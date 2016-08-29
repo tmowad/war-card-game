@@ -18,6 +18,14 @@ public class TestWarDeck {
     Deck deck = new WarDeck();
     deck.create(1, 1);
   }
+
+  @Test
+  public void createSmallDeckAndDealTwo() {
+    Deck deck = new WarDeck();
+    deck.create(2,2);
+    Card cardOne = deck.deal();
+    Card cardTwo = deck.deal();
+  }
   public static void main(String[] args) {
     org.junit.runner.JUnitCore.main("TestWarDeck");
   }
