@@ -64,8 +64,22 @@ public class TestWar {
         assertEquals(0, first.handSize());
         assertEquals(0, second.handSize());
         assertEquals(2, third.handSize());
+    }
 
-
+    @Test
+    public void testOneRoundInvolvingATie() {
+        WarPlayer first = new WarPlayer();
+        WarPlayer second = new WarPlayer();
+        first.addCard(new Card(new WarRank(7), new WarSuit("spades")));
+        second.addCard(new Card(new WarRank(7), new WarSuit("hearts")));
+        first.addCard(new Card(new WarRank(5), new WarSuit("spades")));
+        second.addCard(new Card(new WarRank(8), new WarSuit("hearts")));
+        assertEquals(2, first.handSize());
+        assertEquals(2, second.handSize());
+        War game = new War();
+        game.playOneRound(new WarPlayer[] { first, second });
+        assertEquals(0, first.handSize());
+        assertEquals(4, second.handSize());
     }
 
     public static void main(String[] args) {
