@@ -1,7 +1,8 @@
 public class WarDeck implements Deck {
-  boolean isInitialized = false;
+  private boolean isInitialized = false;
 
   public void create( int numberOfSuits, int numberOfRanks ) {
+    isInitialized = true;
   }
 
   public void shuffle() {
@@ -9,6 +10,9 @@ public class WarDeck implements Deck {
   }
 
   public Card deal() {
-    throw new RuntimeException("not implemented");
+    if (isInitialized == false) {
+      throw new RuntimeException("cannot deal a card before initialization");
+    }
+    return null;
   }
 }

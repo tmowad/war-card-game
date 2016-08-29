@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -8,7 +8,7 @@ public class TestWarDeck {
     Deck deck = new WarDeck();
     try {
       deck.deal();
-      assertNull("Should have thrown exception", new Object());
+      assertTrue("Should not get here -- should have thrown exception", false);
     } catch (Exception e) {
     }
   }
