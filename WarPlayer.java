@@ -7,11 +7,15 @@ class WarPlayer {
         hand.add(card);
     }
 
-    public Card removeCard() {
+    public Card takeCard() {
         return hand.removeFirst();
     }
 
     public int handSize() {
         return hand.size();
+    }
+
+    public boolean hasCards() {
+        return hand.size() > 0;
     }
 }

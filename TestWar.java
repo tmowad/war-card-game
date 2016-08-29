@@ -33,6 +33,21 @@ public class TestWar {
 
     }
 
+    @Test
+    public void testOneSimpleRound() {
+        WarPlayer first = new WarPlayer();
+        first.addCard(new Card(new WarRank(3), new WarSuit("spades")));
+        WarPlayer second = new WarPlayer();
+        second.addCard(new Card(new WarRank(7), new WarSuit("hearts")));
+        assertEquals(1, first.handSize());
+        assertEquals(1, second.handSize());
+
+        War game = new War();
+        game.playOneRound(new WarPlayer[] { first, second });
+        assertEquals(0, first.handSize());
+        assertEquals(2, second.handSize());
+    }
+
     public static void main(String[] args) {
       org.junit.runner.JUnitCore.main("TestWar");
     }
