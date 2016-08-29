@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class WarDeck implements Deck {
   private ArrayList<Card> cards = null;
@@ -16,7 +17,7 @@ public class WarDeck implements Deck {
   }
 
   public void shuffle() {
-    throw new RuntimeException("not implemented");
+    Collections.shuffle(this.cards);
   }
 
   public Card deal() {
