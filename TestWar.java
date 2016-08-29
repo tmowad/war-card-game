@@ -16,6 +16,23 @@ public class TestWar {
         assertNotNull(players[1]);
         assertEquals(players[1].handSize(), 26);
     }
+
+    @Test
+    public void testDivideCardsThreeWays() {
+        War game = new War();
+        Deck deck = new WarDeck();
+        deck.create(4, 13);
+        WarPlayer[] players = game.divideCards(deck, 3);
+        assertEquals(players.length, 3);
+        assertNotNull(players[0]);
+        assertEquals(18, players[0].handSize());
+        assertNotNull(players[1]);
+        assertEquals(17, players[1].handSize());
+        assertNotNull(players[2]);
+        assertEquals(17, players[2].handSize());
+
+    }
+
     public static void main(String[] args) {
       org.junit.runner.JUnitCore.main("TestWar");
     }
