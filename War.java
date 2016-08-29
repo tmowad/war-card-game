@@ -30,7 +30,27 @@ public class War {
      * @param players A list of players.
      */
     void playOneRound(WarPlayer[] players) {
-        throw new RuntimeException("not implemented");
+        Card[] oneFromEach = new Card[players.length];
+        for (int i=0; i<players.length; i++) {
+            if (players[i].hasCards()) {
+                oneFromEach[i] = players[i].takeCard();
+            } else {
+                oneFromEach[i] = null;
+            }
+        }
+
+        int winningestIndex = 0;
+        Card winningestCard = oneFromEach[0];
+
+        for (int i=1; i<oneFromEach.length; i++) {
+            int compareResult = oneFromEach[i].compareTo(winningestCard);
+            if (compareResult > 0) {
+                winningestCard = oneFromEach[i];
+                winningestIndex = i;
+            }
+        }
+
+        players[winningestIndex].addCards(oneFromEach);
     }
 
     WarPlayer[] divideCards(Deck deck, int numberOfPlayers) {

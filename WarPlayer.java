@@ -7,6 +7,16 @@ class WarPlayer {
         hand.add(card);
     }
 
+    /**
+     * TODO: we may want to use another data structure (a Collection instead 
+     * of an array) to avoid for-loop here, but...it works for now.  
+     */
+    public void addCards(Card[] cards) {
+        for (int i=0; i<cards.length; i++) {
+            hand.add(cards[i]);
+        }
+    }
+
     public Card takeCard() {
         return hand.removeFirst();
     }
