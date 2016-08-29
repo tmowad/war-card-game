@@ -1,12 +1,10 @@
 import java.util.ArrayList;
 
 public class WarDeck implements Deck {
-  private boolean isInitialized = false;
-
-  private ArrayList<Card> cards = new ArrayList<Card>();
+  private ArrayList<Card> cards = null;
 
   public void create( int numberOfSuits, int numberOfRanks ) {
-    isInitialized = true;
+    this.cards = new ArrayList<Card>();
 
     for (int i=0; i<numberOfSuits; i++) {
       final String suitName = "suit_" + i;
@@ -46,7 +44,7 @@ public class WarDeck implements Deck {
   }
 
   public Card deal() {
-    if (isInitialized == false) {
+    if (this.cards == null) {
       throw new RuntimeException("cannot deal a card before initialization");
     }
     if (cards.size() == 0) {
