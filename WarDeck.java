@@ -9,8 +9,14 @@ public class WarDeck implements Deck {
     isInitialized = true;
 
     for (int i=0; i<numberOfSuits; i++) {
+      final String suitName = "suit_" + i;
+      Suit suit = new Suit() {
+        public String getName() {
+          return suitName;
+        }
+      };
       for (int j=0; j<numberOfRanks; j++) {
-        cards.add(new Card(new Rank() {}, new Suit() {}));
+        cards.add(new Card(new Rank() {}, suit));
       }
     }
   }
@@ -23,6 +29,9 @@ public class WarDeck implements Deck {
     if (isInitialized == false) {
       throw new RuntimeException("cannot deal a card before initialization");
     }
-    return cards.get(0);
+    if (cards.size() == 0) {
+      throw new RuntimeException("cannot deal card from empty deck");
+    }
+    return cards.remove(0);
   }
 }

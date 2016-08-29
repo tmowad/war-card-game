@@ -22,14 +22,14 @@ public class TestWarDeck {
   }
 
   @Test
-  public void createSmallDeckAndDealTwo() {
+  public void createSmallDeckAndDealTwoDifferentSuits() {
     Deck deck = new WarDeck();
-    deck.create(2,2);
+    deck.create(4,1);
     Card cardOne = deck.deal();
     Card cardTwo = deck.deal();
     assertNotNull(cardOne);
     assertNotNull(cardTwo);
-    assertNotEquals(cardOne, cardTwo);
+    assertNotEquals("cardOne and cardTwo should be different", cardOne, cardTwo);
   }
   public static void main(String[] args) {
     org.junit.runner.JUnitCore.main("TestWarDeck");
