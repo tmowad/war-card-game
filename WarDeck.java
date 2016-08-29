@@ -7,33 +7,9 @@ public class WarDeck implements Deck {
     this.cards = new ArrayList<Card>();
 
     for (int i=0; i<numberOfSuits; i++) {
-      final String suitName = "suit_" + i;
-      Suit suit = new Suit() {
-        public String getName() {
-          return suitName;
-        }
-        public boolean equals(Object o) {
-          Suit otherSuit = (Suit) o;
-          return suitName.equals(otherSuit.getName());
-        }
-        public String toString() {
-          return suitName;
-        }
-      };
+      Suit suit = new WarSuit("suit_" + i);
       for (int j=0; j<numberOfRanks; j++) {
-        final Integer rankValue = j;
-        Rank rank = new Rank() {
-          public int getValue() {
-            return rankValue;
-          }
-          public boolean equals(Object other) {
-            Rank otherRank = (Rank) other;
-            return rankValue == otherRank.getValue();
-          }
-          public String toString() {
-            return "" + rankValue;
-          }
-        };
+        Rank rank = new WarRank(j);
         cards.add(new Card(rank, suit));
       }
     }
