@@ -23,4 +23,8 @@ public class Card {
     Card otherCard = (Card) other;
     return this.rank.equals(otherCard.rank) && this.suit.equals(otherCard.suit);
   }
+
+  public String toString() {
+    return "Card<" + rank.toString() + " of " + suit.toString() + ">";
+  }
 }

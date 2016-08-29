@@ -31,6 +31,18 @@ public class TestWarDeck {
     assertNotNull(cardTwo);
     assertNotEquals("cardOne and cardTwo should be different", cardOne, cardTwo);
   }
+
+  @Test
+  public void createSmallDeckAndDealTwoDifferentRanks() {
+    Deck deck = new WarDeck();
+    deck.create(1, 5);
+    Card cardOne = deck.deal();
+    Card cardTwo = deck.deal();
+    assertNotNull(cardOne);
+    assertNotNull(cardTwo);
+    assertNotEquals(cardOne, cardTwo);
+  }
+
   public static void main(String[] args) {
     org.junit.runner.JUnitCore.main("TestWarDeck");
   }

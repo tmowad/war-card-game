@@ -14,9 +14,29 @@ public class WarDeck implements Deck {
         public String getName() {
           return suitName;
         }
+        public boolean equals(Object o) {
+          Suit otherSuit = (Suit) o;
+          return suitName.equals(otherSuit.getName());
+        }
+        public String toString() {
+          return suitName;
+        }
       };
       for (int j=0; j<numberOfRanks; j++) {
-        cards.add(new Card(new Rank() {}, suit));
+        final Integer rankValue = j;
+        Rank rank = new Rank() {
+          public int getValue() {
+            return rankValue;
+          }
+          public boolean equals(Object other) {
+            Rank otherRank = (Rank) other;
+            return rankValue == otherRank.getValue();
+          }
+          public String toString() {
+            return "" + rankValue;
+          }
+        };
+        cards.add(new Card(rank, suit));
       }
     }
   }
