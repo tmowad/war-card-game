@@ -70,16 +70,24 @@ public class TestWar {
     public void testOneRoundInvolvingATie() {
         WarPlayer first = new WarPlayer();
         WarPlayer second = new WarPlayer();
+        
+        // first round tie causes a WAR
         first.addCard(new Card(new WarRank(7), new WarSuit("spades")));
         second.addCard(new Card(new WarRank(7), new WarSuit("hearts")));
+
+        // face down for subround 2 of round 1
+        first.addCard(new Card(new WarRank(5), new WarSuit("spades")));
+        second.addCard(new Card(new WarRank(9), new WarSuit("hearts")));
+
+        // face up for subround 2 of round 1
         first.addCard(new Card(new WarRank(5), new WarSuit("spades")));
         second.addCard(new Card(new WarRank(8), new WarSuit("hearts")));
-        assertEquals(2, first.handSize());
-        assertEquals(2, second.handSize());
+        assertEquals(3, first.handSize());
+        assertEquals(3, second.handSize());
         War game = new War();
         game.playOneRound(new WarPlayer[] { first, second });
         assertEquals(0, first.handSize());
-        assertEquals(4, second.handSize());
+        assertEquals(6, second.handSize());
     }
 
     /**

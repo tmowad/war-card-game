@@ -40,7 +40,7 @@ public class War {
 
         Set<Card> thePot = new HashSet<Card>();
 
-        do {
+        while (true) {
             // List of ( Card || null ) corresponding to the players array
             Card[] currentSubRound = new Card[players.length];
             for (int i=0; i<players.length; i++) {
@@ -81,7 +81,18 @@ public class War {
                     thePot.add(currentSubRound[i]);
                 }
             }
-        } while (winningestPlayers.size() > 1);
+
+            if (winningestPlayers.size() > 1) {
+                // add the 'face down' cards to the pot
+                for (int i=0; i<players.length; i++) {
+                if (players[i].hasCards()) {
+                    thePot.add(players[i].takeCard());
+                }
+            }
+            } else {
+                break;
+            }
+        }
 
         if (winningestPlayers.size() == 0) {
             // I believe that this case is possible, but not statistically 
