@@ -82,7 +82,13 @@ public class TestWar {
         assertEquals(4, second.handSize());
     }
 
+    // TODO: show a test case that could lead to a draw game, and ensure we get
+    // the proper Exception back
+    @Test
+    public void realDrawTestCase() {
+    }
+
     public static void main(String[] args) {
-      org.junit.runner.JUnitCore.main("TestWar");
+        org.junit.runner.JUnitCore.main("TestWar");
     }
 }

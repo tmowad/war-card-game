@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.Set;
 
 class WarPlayer {
     private LinkedList<Card> hand = new LinkedList<Card>();
@@ -11,14 +12,10 @@ class WarPlayer {
      * TODO: we may want to use another data structure (a Collection instead 
      * of an array) to avoid for-loop here, but...it works for now.  
      *
-     * NOTE: We are checking for potential null cards in the array.  
+     * NOTE: We are NOT checking for potential null cards in the array.  
      */
-    public void addCards(Card[] cards) {
-        for (int i=0; i<cards.length; i++) {
-            if (cards[i] != null) {
-                hand.add(cards[i]);
-            }
-        }
+    public void addCards(Set<Card> cards) {
+        hand.addAll(cards);
     }
 
     public Card takeCard() {

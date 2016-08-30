@@ -1,3 +1,7 @@
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
+
 public class War {
     public void play(int numberOfSuits, int numberOfRanks, int numberOfPlayers) {
         Deck deck = new WarDeck();
@@ -30,37 +34,63 @@ public class War {
      * @param players A list of players.
      */
     void playOneRound(WarPlayer[] players) {
-        Card[] oneFromEach = new Card[players.length];
-        for (int i=0; i<players.length; i++) {
-            if (players[i].hasCards()) {
-                oneFromEach[i] = players[i].takeCard();
-            } else {
-                oneFromEach[i] = null;
+        // A set that keeps track of how many players (by their index in 
+        // players) array are tied in the current sub-round.  
+        Set<Integer> winningestPlayers = new HashSet<Integer>();
+
+        Set<Card> thePot = new HashSet<Card>();
+
+        do {
+            // List of ( Card || null ) corresponding to the players array
+            Card[] currentSubRound = new Card[players.length];
+            for (int i=0; i<players.length; i++) {
+                if (players[i].hasCards()) {
+                    currentSubRound[i] = players[i].takeCard();
+                } else {
+                    currentSubRound[i] = null;
+                }
             }
+
+            winningestPlayers.clear();
+            Card winningestCard = null;
+
+            for (int i=0; i<currentSubRound.length; i++) {
+                if (currentSubRound[i] == null) {
+                    continue;
+                }
+
+                if (winningestCard == null) {
+                    winningestCard = currentSubRound[i];
+                    winningestPlayers.add(i);
+                    continue;
+                }
+
+                int compareResult = currentSubRound[i].compareTo(winningestCard);
+                if (compareResult > 0) {
+                    winningestCard = currentSubRound[i];
+                    winningestPlayers.clear();
+                    winningestPlayers.add(i);
+                } else if (compareResult == 0) {
+                    winningestPlayers.add(i);
+                }
+            }
+
+            // add all Cards from currentSubRound to thePot
+            for (int i=0; i<currentSubRound.length; i++) {
+                if (currentSubRound[i] != null) {
+                    thePot.add(currentSubRound[i]);
+                }
+            }
+        } while (winningestPlayers.size() > 1);
+
+        if (winningestPlayers.size() == 0) {
+            // I believe that this case is possible, but not statistically 
+            // likely in a large deck.  With two players, it could happen if we
+            // had the exact same ordering of 26 (equal rank) cards in a row.  
+            throw new RuntimeException("Draw card game: extremely unlikely unless on purpose or tiny deck");
         }
 
-        int winningestIndex = -1;
-        Card winningestCard = null;
-
-        for (int i=0; i<oneFromEach.length; i++) {
-            if (oneFromEach[i] == null) {
-                continue;
-            }
-
-            if (winningestCard == null) {
-                winningestCard = oneFromEach[i];
-                winningestIndex = i;
-                continue;
-            }
-
-            int compareResult = oneFromEach[i].compareTo(winningestCard);
-            if (compareResult > 0) {
-                winningestCard = oneFromEach[i];
-                winningestIndex = i;
-            }
-        }
-
-        players[winningestIndex].addCards(oneFromEach);
+        players[winningestPlayers.iterator().next()].addCards(thePot);
     }
 
     WarPlayer[] divideCards(Deck deck, int numberOfPlayers) {
