@@ -125,7 +125,7 @@ public class War {
             }
 
             if (printStuff) {
-                String cRound = "current round: [0 -> " + currentSubRound[0];
+                String cRound = "* current sub-round: [0 -> " + currentSubRound[0];
                 for (int i=1; i<currentSubRound.length; i++) {
                     if (currentSubRound[i] != null) {
                         cRound += " ; " + i + " -> " + currentSubRound[i];
@@ -144,7 +144,7 @@ public class War {
             if (winningestPlayers.size() > 1) {
                 // add the 'face down' cards to the pot
                 if (printStuff) {
-                    System.out.println("*round of cards played face down*");
+                    System.out.println("* face down sub-round");
                 }
                 for (int i=0; i<players.length; i++) {
                     
