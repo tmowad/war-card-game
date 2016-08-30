@@ -24,7 +24,13 @@ public class War {
      *         false, if at most one player has cards
      */
     boolean multipleNonEmptyPlayers(WarPlayer[] players) {
-        throw new RuntimeException("not implemented");
+        int numNonEmpty = 0;
+        for (int i=0; i<players.length; i++) {
+            if (players[i].handSize() > 0) {
+                numNonEmpty ++;
+            }
+        }
+        return numNonEmpty > 1;
     }
 
     /**
@@ -131,6 +137,7 @@ public class War {
             System.out.println("round " + roundNumber++ + ": p1[" + players[0].handSize() + "], p2[" + players[1].handSize() + "]");
             game.playOneRound(players);
         }
+        System.out.println("round " + roundNumber++ + ": p1[" + players[0].handSize() + "], p2[" + players[1].handSize() + "]");
 
     }
 }
