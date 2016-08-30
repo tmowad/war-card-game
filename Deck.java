@@ -10,4 +10,7 @@ public interface Deck {
 
   /* deal a card from the deck */
   public Card deal();
+
+  /* return the number of cards in a deck */
+  public int numCards();
 }

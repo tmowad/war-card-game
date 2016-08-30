@@ -25,7 +25,7 @@ public class TestWar {
         WarPlayer[] players = game.divideCards(deck, 3);
         assertEquals(players.length, 3);
         assertNotNull(players[0]);
-        assertEquals(18, players[0].handSize());
+        assertEquals(17, players[0].handSize());
         assertNotNull(players[1]);
         assertEquals(17, players[1].handSize());
         assertNotNull(players[2]);

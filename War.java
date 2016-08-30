@@ -6,15 +6,33 @@ import java.util.Iterator;
  * Contains a lot of the top level functionality of the War card game.  
  */
 public class War {
+    /**
+     * In lieu of a log library like log4j of slf4j we just use a boolean
+     * to determine whether or not to provide logging.  (Helps to keep the
+     * unit test code clean but provide output for the console program.)
+     */
     private boolean printStuff = false;
 
+    /**
+     * Default constructor.
+     */
     public War() {
     }
 
+    /**
+     * Constructor that sets the printStuff boolean.  
+     * @param printStuff Whether or not to print output to System.out. 
+     */
     public War(boolean printStuff) {
         this.printStuff = printStuff;
     }
 
+    /**
+     * Play a full game.  
+     * @param numberOfSuits Number of suits in our deck.  
+     * @param numberOfRanks Number of ranks in our deck.  
+     * @param numberOfPlayers Number of players in our game.  
+     */
     public void play(int numberOfSuits, int numberOfRanks, int numberOfPlayers) {
         Deck deck = new WarDeck();
         deck.create(numberOfSuits, numberOfRanks);
@@ -153,11 +171,13 @@ public class War {
             players[i] = new WarPlayer();
         }
         Card card;
+        int cardsPerPlayer = deck.numCards() / numberOfPlayers;
         int playerCounter = 0;
-        while ((card = deck.deal()) != null) {
-            players[playerCounter].addCard(card);
-            playerCounter = (playerCounter+1) % numberOfPlayers;
+
+        for (int i=0; i<cardsPerPlayer*numberOfPlayers; i++) {
+            players[i%numberOfPlayers].addCard(deck.deal());
         }
+        
         return players;
     }
 

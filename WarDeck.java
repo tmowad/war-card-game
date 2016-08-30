@@ -34,4 +34,8 @@ public class WarDeck implements Deck {
     }
     return cards.remove(0);
   }
+
+  public int numCards() {
+    return cards.size();
+  }
 }
