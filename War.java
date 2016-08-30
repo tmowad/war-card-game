@@ -6,6 +6,15 @@ import java.util.Iterator;
  * Contains a lot of the top level functionality of the War card game.  
  */
 public class War {
+    private boolean printStuff = false;
+
+    public War() {
+    }
+
+    public War(boolean printStuff) {
+        this.printStuff = printStuff;
+    }
+
     public void play(int numberOfSuits, int numberOfRanks, int numberOfPlayers) {
         Deck deck = new WarDeck();
         deck.create(numberOfSuits, numberOfRanks);
@@ -22,9 +31,9 @@ public class War {
     }
 
     private String generateRoundString(int roundNumber, WarPlayer[] players) {
-        String roundString = "round " + roundNumber + ": p1[" + players[0].handSize() + "]";
+        String roundString = "round " + roundNumber + ": p1[" + players[0].handSize() + " cards]";
         for (int i=1; i<players.length; i++) {
-            roundString += ", p" + (i+1) + "[" + players[i].handSize() + "]";
+            roundString += ", p" + (i+1) + "[" + players[i].handSize() + " cards]";
         }
         return roundString;
     }
@@ -95,6 +104,16 @@ public class War {
                 }
             }
 
+            if (printStuff) {
+                String cRound = "current round: [0 -> " + currentSubRound[0];
+                for (int i=1; i<currentSubRound.length; i++) {
+                    if (currentSubRound[i] != null) {
+                        cRound += " ; " + i + " -> " + currentSubRound[i];
+                    }
+                    cRound += "]";
+                }
+                System.out.println(cRound);
+            }
             // add all Cards from currentSubRound to thePot
             for (int i=0; i<currentSubRound.length; i++) {
                 if (currentSubRound[i] != null) {
@@ -104,11 +123,15 @@ public class War {
 
             if (winningestPlayers.size() > 1) {
                 // add the 'face down' cards to the pot
-                for (int i=0; i<players.length; i++) {
-                if (players[i].hasCards()) {
-                    thePot.add(players[i].takeCard());
+                if (printStuff) {
+                    System.out.println("*round of cards played face down*");
                 }
-            }
+                for (int i=0; i<players.length; i++) {
+                    
+                    if (players[i].hasCards()) {
+                        thePot.add(players[i].takeCard());
+                    }
+                }
             } else {
                 break;
             }
@@ -155,7 +178,7 @@ public class War {
         }
         System.out.println("Playing with " + numberOfSuits + " suits, " + numberOfRanks + " ranks, and " + numberOfPlayers + " players.");
 
-        War game = new War();
+        War game = new War(true);
         game.play(numberOfSuits, numberOfRanks, numberOfPlayers);
     }
 }

@@ -1,1 +1,1 @@
-java War 4 13 2
+java War $1 $2 $3
