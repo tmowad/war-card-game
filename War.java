@@ -2,6 +2,9 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
 
+/**
+ * Contains a lot of the top level functionality of the War card game.  
+ */
 public class War {
     public void play(int numberOfSuits, int numberOfRanks, int numberOfPlayers) {
         Deck deck = new WarDeck();
@@ -9,10 +12,21 @@ public class War {
         deck.shuffle();
         
         WarPlayer[] players = divideCards(deck, numberOfPlayers);
-        
+
+        int roundNumber = 0;
         while (multipleNonEmptyPlayers(players)) {
+            System.out.println(generateRoundString(roundNumber++, players));
             playOneRound(players);
         }
+        System.out.println(generateRoundString(roundNumber++, players));
+    }
+
+    private String generateRoundString(int roundNumber, WarPlayer[] players) {
+        String roundString = "round " + roundNumber + ": p1[" + players[0].handSize() + "]";
+        for (int i=1; i<players.length; i++) {
+            roundString += ", p" + (i+1) + "[" + players[i].handSize() + "]";
+        }
+        return roundString;
     }
 
     /**
@@ -124,20 +138,24 @@ public class War {
         return players;
     }
 
+    // int numberOfSuits, int numberOfRanks, int numberOfPlayers
     public static void main(String[] args) {
-        Deck deck = new WarDeck();
-        deck.create(4, 13);
-        deck.shuffle();
+        int numberOfSuits;
+        int numberOfRanks;
+        int numberOfPlayers;
+
+        if (args.length == 3) {
+            numberOfSuits = Integer.parseInt(args[0]);
+            numberOfRanks = Integer.parseInt(args[1]);
+            numberOfPlayers = Integer.parseInt(args[2]);
+        } else {
+            numberOfSuits = 4;
+            numberOfRanks = 13;
+            numberOfPlayers = 2;
+        }
+        System.out.println("Playing with " + numberOfSuits + " suits, " + numberOfRanks + " ranks, and " + numberOfPlayers + " players.");
 
         War game = new War();
-        WarPlayer[] players = game.divideCards(deck, 2);
-        
-        int roundNumber = 0;
-        while (game.multipleNonEmptyPlayers(players)) {
-            System.out.println("round " + roundNumber++ + ": p1[" + players[0].handSize() + "], p2[" + players[1].handSize() + "]");
-            game.playOneRound(players);
-        }
-        System.out.println("round " + roundNumber++ + ": p1[" + players[0].handSize() + "], p2[" + players[1].handSize() + "]");
-
+        game.play(numberOfSuits, numberOfRanks, numberOfPlayers);
     }
 }

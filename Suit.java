@@ -1,5 +1,5 @@
 /**
- * At least in War, suits have no meaning/semantics, so we just use a String name.
+ * Abstract representation of the suit of a card.  
  */
 public interface Suit {
     public String getName();
