@@ -141,7 +141,7 @@ public class War {
             // I believe that this case is possible, but not statistically 
             // likely in a large deck.  With two players, it could happen if we
             // had the exact same ordering of 26 (equal rank) cards in a row.  
-            throw new RuntimeException("Draw card game: extremely unlikely unless on purpose or tiny deck");
+            throw new DrawGameException("Draw card game: extremely unlikely unless on purpose or tiny deck");
         }
 
         players[winningestPlayers.iterator().next()].addCards(thePot);

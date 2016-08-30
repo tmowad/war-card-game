@@ -134,10 +134,38 @@ public class TestWar {
 
     }
 
-    // TODO: show a test case that could lead to a draw game, and ensure we get
-    // the proper Exception back
     @Test
     public void realDrawTestCase() {
+        WarPlayer first = new WarPlayer();
+        WarPlayer second = new WarPlayer();
+
+        // this hand will result in a WAR
+        first.addCard(new Card(new WarRank(7), new WarSuit("spades")));
+        second.addCard(new Card(new WarRank(7), new WarSuit("hearts")));
+        
+        // this 2nd subround of round 1 is a throwaway ('dealt face down')
+        first.addCard(new Card(new WarRank(1), new WarSuit("spades")));
+        second.addCard(new Card(new WarRank(2), new WarSuit("hearts")));
+
+        // this 2nd subround of round 1 is the hand played ('dealt face up')
+        // obviously second player wins
+        first.addCard(new Card(new WarRank(4), new WarSuit("spades")));
+        second.addCard(new Card(new WarRank(4), new WarSuit("hearts")));
+
+        // we hit this layer of cards for the second 'face down'
+        first.addCard(new Card(new WarRank(11), new WarSuit("spades")));
+        second.addCard(new Card(new WarRank(2), new WarSuit("hearts")));
+
+        assertEquals(4, first.handSize());
+        assertEquals(4, second.handSize());
+
+        try {
+            War game = new War();
+            game.playOneRound(new WarPlayer[] {first,second});
+            assertNotNull(null); // this line gets run and fails if 
+            // DrawGameException is not thrown by .playOneRound() above
+        } catch (DrawGameException e) {
+        }
     }
 
     public static void main(String[] args) {
