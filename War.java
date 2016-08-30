@@ -117,4 +117,20 @@ public class War {
         }
         return players;
     }
+
+    public static void main(String[] args) {
+        Deck deck = new WarDeck();
+        deck.create(4, 13);
+        deck.shuffle();
+
+        War game = new War();
+        WarPlayer[] players = game.divideCards(deck, 2);
+        
+        int roundNumber = 0;
+        while (game.multipleNonEmptyPlayers(players)) {
+            System.out.println("round " + roundNumber++ + ": p1[" + players[0].handSize() + "], p2[" + players[1].handSize() + "]");
+            game.playOneRound(players);
+        }
+
+    }
 }
