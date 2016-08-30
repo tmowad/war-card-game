@@ -76,7 +76,9 @@ public class War {
 
     /**
      * This method will modify the given list of players and the cards in their
-     * hands to simulate one round of War.   
+     * hands to simulate one round of War.  It handles ties and sub-rounds, and
+     * plays one round of face-down cards for each tie sub-round of War.  If a 
+     * player runs out of cards during war, the player loses.  
      *
      * @param players A list of players.
      */
@@ -159,12 +161,18 @@ public class War {
             // I believe that this case is possible, but not statistically 
             // likely in a large deck.  With two players, it could happen if we
             // had the exact same ordering of 26 (equal rank) cards in a row.  
-            throw new DrawGameException("Draw card game: extremely unlikely unless on purpose or tiny deck");
+            throw new DrawGameException("Draw card game: unlikely unless on purpose or tiny deck");
         }
 
         players[winningestPlayers.iterator().next()].addCards(thePot);
     }
 
+    /**
+     * Given a deck and a number of players, divide the deck out into players.
+     * @param deck The initialized deck of cards.
+     * @param numberOfPlayers The number of players that will be playing.
+     * @return An array of players with an equal number of cards each from the deck.
+     */
     WarPlayer[] divideCards(Deck deck, int numberOfPlayers) {
         WarPlayer[] players = new WarPlayer[numberOfPlayers];
         for (int i=0; i<players.length; i++) {
